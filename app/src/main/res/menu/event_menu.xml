@@ -14,4 +14,9 @@
         android:id="@+id/showHelp"
         android:icon="@drawable/ic_help"
         android:title="@string/showHelp" />
+
+    <item
+        android:id="@+id/openphef"
+        android:icon="@drawable/ic_help"
+        android:title=" Read Phefumla"/>
 </menu>

@@ -67,6 +67,7 @@ import javax.inject.Inject;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import timber.log.Timber;
 
 public class TeiDashboardMobileActivity extends ActivityGlobalAbstract implements TeiDashboardContracts.View, MapButtonObservable {
 
@@ -125,6 +126,7 @@ public class TeiDashboardMobileActivity extends ActivityGlobalAbstract implement
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        Timber.tag("Patient Details Here...").v("Tasvika");
 
         if (savedInstanceState != null && savedInstanceState.containsKey(Constants.TRACKED_ENTITY_INSTANCE)) {
             teiUid = savedInstanceState.getString(Constants.TRACKED_ENTITY_INSTANCE);
@@ -229,6 +231,8 @@ public class TeiDashboardMobileActivity extends ActivityGlobalAbstract implement
 
     @Override
     protected void onResume() {
+
+        Timber.tag("Patient Details Here...").v("Tasvika");
         super.onResume();
 
         if (currentOrientation != -1) {

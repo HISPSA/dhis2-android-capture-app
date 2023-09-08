@@ -26,6 +26,7 @@ import org.hisp.dhis.android.core.event.EventStatus
 import org.hisp.dhis.android.core.period.PeriodType
 import org.hisp.dhis.android.core.program.Program
 import org.hisp.dhis.android.core.program.ProgramStage
+import timber.log.Timber
 
 const val EXTRA_EVENT_UID = "EVENT_UID"
 
@@ -48,6 +49,8 @@ class ScheduledEventActivity : ActivityGlobalAbstract(), ScheduledEventContract.
     lateinit var presenter: ScheduledEventContract.Presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        Timber.v("I am on event schedule Activity");
         (
             (applicationContext as App).userComponent()!!.plus(
                 ScheduledEventModule(
@@ -64,6 +67,7 @@ class ScheduledEventActivity : ActivityGlobalAbstract(), ScheduledEventContract.
     }
 
     override fun onResume() {
+        Timber.v("I am on event schedule Activity");
         super.onResume()
         presenter.init()
     }

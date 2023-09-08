@@ -54,6 +54,7 @@ import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 import kotlin.Unit;
+import timber.log.Timber;
 
 public class EventInitialActivity extends ActivityGlobalAbstract implements EventInitialContract.View, EventDetailsComponentProvider {
 
@@ -117,6 +118,7 @@ public class EventInitialActivity extends ActivityGlobalAbstract implements Even
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Timber.tag("Event Initial...").v("Tasvika");
         initVariables();
         eventInitialComponent = Objects.requireNonNull(((App) getApplicationContext()).userComponent())
                 .plus(

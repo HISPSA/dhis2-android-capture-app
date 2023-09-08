@@ -524,12 +524,13 @@ public class SearchTEActivity extends ActivityGlobalAbstract implements SearchTE
                         );
                     }
                     case ON_TEI_CLICK -> {
-                        Timber.tag("New Activity").v("Navigating ...");
-                        var activityName = "com.hisp.phefumla.MainActivity"; // target activity name
-                        var packageName = "com.hisp.phefumla"; // target package's name
-                        var intent = new Intent().setClassName(packageName, activityName);
-//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+//                        Timber.tag("New Activity").v("Navigating ...");
+                        LegacyInteraction.OnTeiClick interaction = (LegacyInteraction.OnTeiClick) legacyInteraction;
+                        presenter.onTEIClick(
+                                interaction.getTeiUid(),
+                                interaction.getEnrollmentUid(),
+                                interaction.getOnline()
+                        );
                     }
                 }
 

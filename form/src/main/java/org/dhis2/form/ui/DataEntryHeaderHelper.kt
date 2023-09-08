@@ -14,6 +14,7 @@ import org.dhis2.form.model.FieldUiModel
 import org.dhis2.form.model.SectionUiModelImpl
 import org.dhis2.form.ui.event.RecyclerViewUiEvents
 import org.dhis2.form.ui.intent.FormIntent
+import timber.log.Timber
 
 const val NO_POSITION = -1
 
@@ -72,6 +73,7 @@ class DataEntryHeaderHelper(
                 )
             val sectionHolder = FormViewHolder(binding)
             val sectionPosition: Int? = dataEntryAdapter.getSectionPosition(section.uid)
+            Timber.tag(" Helper Section Size$sectionPosition").v("Tasvika")
             sectionPosition?.let {
                 dataEntryAdapter.updateSectionData(it, true)
             }
@@ -106,4 +108,6 @@ class DataEntryHeaderHelper(
             }
         }
     }
+
+
 }

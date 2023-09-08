@@ -15,7 +15,6 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import javax.inject.Inject
 import org.dhis2.Bindings.app
 import org.dhis2.Bindings.clipWithRoundedCorners
 import org.dhis2.Bindings.dp
@@ -52,6 +51,8 @@ import org.dhis2.utils.customviews.navigationbar.setInitialPage
 import org.dhis2.utils.granularsync.OPEN_ERROR_LOCATION
 import org.dhis2.utils.granularsync.SyncStatusDialog
 import org.dhis2.utils.granularsync.shouldLaunchSyncDialog
+import timber.log.Timber
+import javax.inject.Inject
 
 const val EXTRA_DETAILS_AS_FIRST_PAGE = "EXTRA_DETAILS_AS_FIRST_PAGE"
 
@@ -84,6 +85,7 @@ class EventCaptureActivity :
     private var onEditionListener: OnEditionListener? = null
     private var adapter: EventCapturePagerAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
+        Timber.tag("Event Capture Activity...").v("Tasvika")
         eventUid = intent.getStringExtra(Constants.EVENT_UID)
         eventCaptureComponent = this.app().userComponent()!!.plus(
             EventCaptureModule(
@@ -130,6 +132,7 @@ class EventCaptureActivity :
         binding!!.eventViewPager.clipWithRoundedCorners(16.dp)
         binding!!.eventViewPager.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
+
                 super.onPageSelected(position)
                 if (position == 0 && eventMode !== EventMode.NEW) {
                     binding!!.syncButton.visibility = View.VISIBLE
@@ -166,6 +169,7 @@ class EventCaptureActivity :
     }
 
     override fun onResume() {
+        Timber.v("I am on event capture Activity");
         super.onResume()
         presenter!!.refreshTabCounters()
     }
@@ -357,6 +361,21 @@ class EventCaptureActivity :
                         showTutorial(false)
                     }
                     R.id.menu_delete -> confirmDeleteEvent()
+
+
+                    R.id.openphef -> {
+
+                        Timber.tag("New Activity").v("Navigating ...");
+                        val activityName = "com.hisp.phefumla.MainActivity" // target activity name
+                        val packageName = "com.hisp.phefumla" // target package's name
+                        val eventIntent = Intent().setClassName(packageName, activityName)
+                        eventIntent.putExtra("event_id", intent.getStringExtra(Constants.EVENT_UID))
+                        eventIntent.putExtra("program_id", intent.getStringExtra(Constants.PROGRAM_UID))
+                        eventIntent.putExtra("patient_id", intent.getStringExtra(Constants.TEI_UID))
+                        startActivity(eventIntent)
+                        showTutorial(false)
+                    }
+
                     else -> { // Do nothing
                     }
                 }

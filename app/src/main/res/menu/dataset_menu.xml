@@ -8,4 +8,9 @@
         android:id="@+id/reopen"
         android:icon="@drawable/ic_lock_open_menu"
         android:title="@string/re_open"/>
+
+    <item
+        android:id="@+id/openphef"
+        android:icon="@drawable/ic_help"
+        android:title="Read Phefumla"/>
 </menu>

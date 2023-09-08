@@ -15,6 +15,7 @@ import org.dhis2.form.ui.FormViewHolder.FieldItemCallback
 import org.dhis2.form.ui.event.RecyclerViewUiEvents
 import org.dhis2.form.ui.intent.FormIntent
 import org.hisp.dhis.android.core.common.ValueType
+import timber.log.Timber
 
 class DataEntryAdapter(private val searchStyle: Boolean) :
     ListAdapter<FieldUiModel, FormViewHolder>(DataEntryDiff()),
@@ -32,6 +33,7 @@ class DataEntryAdapter(private val searchStyle: Boolean) :
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
             currentList.find { it.focused }?.onTextChange(p0)
         }
 
@@ -68,13 +70,16 @@ class DataEntryAdapter(private val searchStyle: Boolean) :
     }
 
     override fun onBindViewHolder(holder: FormViewHolder, position: Int) {
+
         if (getItem(position) is SectionUiModelImpl) {
+
             updateSectionData(position, false)
         }
         holder.bind(getItem(position), this, textWatcher, coordinateWatcher)
     }
 
     fun updateSectionData(position: Int, isHeader: Boolean) {
+
         (getItem(position) as SectionUiModelImpl?)!!.setShowBottomShadow(
             !isHeader && position > 0 && getItem(
                 position - 1
@@ -100,7 +105,9 @@ class DataEntryAdapter(private val searchStyle: Boolean) :
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position)!!.layoutId
+
     }
+
 
     fun swap(updates: List<FieldUiModel>, commitCallback: Runnable) {
         sectionPositions = LinkedHashMap()
@@ -120,16 +127,23 @@ class DataEntryAdapter(private val searchStyle: Boolean) :
     }
 
     fun getSectionForPosition(visiblePos: Int): SectionUiModelImpl? {
+
+        if(sectionPositions.values.contains(4)){
+
+        }
+
         val sectionPosition = sectionHandler.getSectionPositionFromVisiblePosition(
             visiblePos,
             isSection(visiblePos),
             ArrayList(sectionPositions.values)
         )
+
         val model = if (sectionPosition != -1) {
             getItem(sectionPosition)
         } else {
             null
         }
+
 
         return if (model is SectionUiModelImpl) {
             model
